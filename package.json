@@ -1,0 +1,54 @@
+{
+  "name": "dragons-of-mugloar",
+  "version": "0.0.1",
+  "description": "JS solution for Dragons of Mugloar game",
+  "main": "src/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "6.25.0",
+    "babel-eslint": "7.2.3",
+    "babel-loader": "7.1.1",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "babel-register": "6.24.1",
+    "clean-webpack-plugin": "0.1.16",
+    "copy-webpack-plugin": "^4.0.1",
+    "eslint": "4.2.0",
+    "eslint-config-airbnb-base": "11.2.0",
+    "eslint-loader": "1.9.0",
+    "eslint-plugin-import": "2.7.0",
+    "webpack": "3.3.0",
+    "webpack-dev-server": "^2.5.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -p --hide-modules",
+    "lint": "eslint \"src/**/*.@(js)\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmnrmr/dragons-of-mugloar.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "ES6",
+    "moon.js",
+    "Dragons of Mugloar game"
+  ],
+  "author": "Leonid Blinov <dmnrmr@gmail.com>",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/dmnrmr/dragons-of-mugloar/issues"
+  },
+  "homepage": "https://github.com/dmnrmr/dragons-of-mugloar#readme",
+  "browserslist": [
+    "Edge >= 12",
+    "Firefox >= 20",
+    "Chrome >= 21",
+    "Safari >= 6.1",
+    "Opera >= 12.1",
+    "iOS >= 7.1",
+    "Android >= 4.4"
+  ]
+}

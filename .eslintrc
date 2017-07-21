@@ -1,0 +1,14 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "extends": "airbnb-base",
+  "rules": {
+    "max-len": ["error", 120],
+    "no-use-before-define": "error",
+    "no-param-reassign": [2, { "props": false }],
+    "consistent-return": 0
+  }
+}
