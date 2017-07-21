@@ -1,4 +1,5 @@
 import path from 'path';
+import webpack from 'webpack';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
@@ -34,6 +35,17 @@ export default function () {
             'eslint-loader',
           ],
         }, {
+          test: /\.(tag)$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'riotjs-loader',
+              options: {
+                type: 'none',
+              },
+            },
+          ],
+        }, {
           test: /\.(html)$/,
           use: [{
             loader: 'url-loader',
@@ -46,6 +58,9 @@ export default function () {
       ],
     },
     plugins: [
+      new webpack.ProvidePlugin({
+        riot: 'riot',
+      }),
       new CopyWebpackPlugin([
         { from: path.resolve(__dirname, './public') },
       ]),
