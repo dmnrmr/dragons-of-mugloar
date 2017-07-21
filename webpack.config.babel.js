@@ -74,6 +74,12 @@ export default function () {
               name: '[name].[ext]',
             },
           }],
+        }, {
+          test: /\.modernizrrc.js$/,
+          use: ['modernizr-loader'],
+        }, {
+          test: /\.modernizrrc(\.json)?$/,
+          use: ['modernizr-loader', 'json-loader'],
         },
       ],
     },
@@ -92,6 +98,9 @@ export default function () {
     resolve: {
       extensions: ['.js', 'styl'],
       modules: ['node_modules'],
+      alias: {
+        modernizr$: path.resolve(__dirname, '.modernizrrc'),
+      },
     },
   };
 
