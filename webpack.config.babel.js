@@ -1,7 +1,9 @@
 import path from 'path';
 import webpack from 'webpack';
+import autoprefixer from 'autoprefixer';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 export default function () {
   const isProd = process.argv.indexOf('-p') !== -1;
@@ -46,6 +48,23 @@ export default function () {
             },
           ],
         }, {
+          test: /\.styl$/,
+          exclude: /node_modules/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              'css-loader',
+              {
+                loader: 'postcss-loader',
+                options: {
+                  ident: 'postcss',
+                  plugins: () => [autoprefixer],
+                },
+              },
+              'stylus-loader',
+            ],
+          }),
+        }, {
           test: /\.(html)$/,
           use: [{
             loader: 'url-loader',
@@ -58,6 +77,10 @@ export default function () {
       ],
     },
     plugins: [
+      new ExtractTextPlugin({
+        filename: 'bundle.css',
+        allChunks: true,
+      }),
       new webpack.ProvidePlugin({
         riot: 'riot',
       }),
@@ -66,7 +89,7 @@ export default function () {
       ]),
     ],
     resolve: {
-      extensions: ['.js'],
+      extensions: ['.js', 'styl'],
       modules: ['node_modules'],
     },
   };
