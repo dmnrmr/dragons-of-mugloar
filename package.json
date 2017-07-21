@@ -56,11 +56,11 @@
   "homepage": "https://github.com/dmnrmr/dragons-of-mugloar#readme",
   "browserslist": [
     "Edge >= 12",
-    "Firefox >= 20",
-    "Chrome >= 21",
-    "Safari >= 6.1",
-    "Opera >= 12.1",
-    "iOS >= 7.1",
-    "Android >= 4.4"
+    "Firefox >= 29",
+    "Chrome >= 33",
+    "Safari >= 7.1",
+    "Opera >= 20",
+    "iOS >= 8",
+    "Android >= 4.4.4"
   ]
 }

@@ -26,6 +26,7 @@ export default function () {
         modules: false,
       },
       port: 8080,
+      disableHostCheck: true,
     },
     module: {
       rules: [
