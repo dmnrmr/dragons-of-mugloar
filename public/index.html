@@ -7,11 +7,11 @@
 
     <title>Dragons of Mugloar</title>
 
-     <link rel="stylesheet" type="text/css" href="bundle.css">
     <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+    <% for (var css in htmlWebpackPlugin.files.css) { %><link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet"><% } %>
   </head>
   <body>
-    <app></app>
+    <dom-index-page></dom-index-page>
 
     <noscript>
       <div id="content">
@@ -23,6 +23,7 @@
       </div>
     </noscript>
 
-    <script src="bundle.js"></script>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script><% } %>
   </body>
 </html>

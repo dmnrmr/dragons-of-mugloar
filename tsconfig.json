@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "lib": ["es2015", "dom"],
+    "module": "es6",
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
