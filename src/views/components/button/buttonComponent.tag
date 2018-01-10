@@ -1,10 +1,7 @@
 <dom-button>
-  <button class="dom-button">Play</button>
+  <button class="dom-button" onclick="{ opts.buttonClickHandler }">Play</button>
 
   <script>
-    import { init } from './buttonComponent'
     import './buttonComponent.styl';
-
-    init(this);
   </script>
 </dom-button>
