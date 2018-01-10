@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "dependencies": {
     "riot": "3.8.1",
+    "router5": "5.7.2",
     "webfontloader": "1.6.28"
   },
   "devDependencies": {

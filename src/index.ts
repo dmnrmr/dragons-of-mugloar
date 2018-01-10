@@ -1,6 +1,5 @@
 import webfontloader from 'webfontloader';
-import riot from 'riot';
-import './views/pages/index';
+import router from './config/router';
 import './styles/common.styl';
 
 const initFonts = () => new Promise((resolve) => {
@@ -14,7 +13,7 @@ const initFonts = () => new Promise((resolve) => {
 
 const init = () => {
   initFonts().then(() => {
-    riot.mount('dom-index-page');
+    router.start();
   });
 };
 
