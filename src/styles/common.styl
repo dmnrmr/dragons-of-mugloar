@@ -1,13 +1,21 @@
+@import './variables.styl'
+
 html,
 body
   height 100%
   margin 0
   padding 0
-  color white
+  color main-text-color
 
 body
-  background-color black
-  font 14px/normal 'Open Sans', sans-serif
+  background-color main-background-color
+  font .8em/normal 'Open Sans', sans-serif
 
-a
-  color white
+a, button
+  color main-text-color
+
+h1, h2, h3, h4, h5, p
+  margin 0
+
+*
+  box-sizing border-box

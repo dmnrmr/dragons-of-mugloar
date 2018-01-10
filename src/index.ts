@@ -6,9 +6,9 @@ import './styles/common.styl';
 const initFonts = () => new Promise((resolve) => {
   webfontloader.load({
     google: {
-      families: ['Open+Sans']
+      families: ['Open Sans:300,700'],
     },
-    active: () => resolve()
+    active: () => resolve(),
   });
 });
 
