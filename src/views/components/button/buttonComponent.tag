@@ -2,8 +2,8 @@
   <button class="dom-button">Play</button>
 
   <script>
-    import { init } from './button'
-    import './button.styl';
+    import { init } from './buttonComponent'
+    import './buttonComponent.styl';
 
     init(this);
   </script>

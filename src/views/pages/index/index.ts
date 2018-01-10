@@ -1,4 +1,4 @@
-import './index.tag';
+import './indexPage.tag';
 
 const tagName = 'dom-index-page';
 

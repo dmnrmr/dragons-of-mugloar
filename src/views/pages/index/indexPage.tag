@@ -5,6 +5,6 @@
 
   <script>
     import '../../components/button';
-    import './index.styl';
+    import './indexPage.styl';
   </script>
 </dom-index-page>

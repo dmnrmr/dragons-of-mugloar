@@ -1,4 +1,4 @@
-import './button.tag';
+import './buttonComponent.tag';
 
 const tagName = 'dom-button';
 
