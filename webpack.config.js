@@ -44,7 +44,6 @@ const generateConfig = function (isProd) {
 
         }, {
           test: /\.(tag)$/,
-          exclude: /node_modules/,
           use: [
             {
               loader: 'riot-tag-loader',
@@ -53,7 +52,6 @@ const generateConfig = function (isProd) {
           ],
         }, {
           test: /\.styl$/,
-          exclude: /node_modules/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
