@@ -1,6 +1,3 @@
-'use strict';
-
-const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -42,6 +39,7 @@ const generateConfig = function (isProd) {
                 }
               },
             },
+            'tslint-loader',
           ],
 
         }, {
@@ -79,9 +77,6 @@ const generateConfig = function (isProd) {
         filename: 'bundle.[hash].css',
         allChunks: true,
       }),
-      new webpack.ProvidePlugin({
-        riot: 'riot',
-      }),
       new ForkTsCheckerWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: './public/index.html',
@@ -104,12 +99,6 @@ const generateConfig = function (isProd) {
     );
 
     delete config.devtool;
-  } else {
-    config.module.rules.push({
-      test: /\.ts?$/,
-      enforce: 'pre',
-      loader: 'tslint-loader'
-    });
   }
 
   return config;

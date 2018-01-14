@@ -1,5 +1,6 @@
 import riot from 'riot';
 import createRouter, { Router, State } from 'router5';
+import browserPlugin from 'router5/plugins/browser';
 import listenersPlugin from 'router5/plugins/listeners';
 import { INDEX_ROUTE } from '../constants/routes';
 import { updateDocumentTitle } from '../services/htmlService';
@@ -13,6 +14,7 @@ export interface RouterWithListenersPlugin extends Router {
 
 const router = createRouter([])
   .setOption('defaultRoute', INDEX_ROUTE)
+  .usePlugin(browserPlugin())
   .usePlugin(listenersPlugin()) as RouterWithListenersPlugin;
 
 Object.keys(routes).forEach((key) => {
