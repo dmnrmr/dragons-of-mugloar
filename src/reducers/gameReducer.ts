@@ -1,13 +1,9 @@
-import { ACTIONS, GameStatus } from '../constants/gameConstants';
-import { GameAction, GameState } from '../typings/gameTypings';
-
-const INITIAL_STATE: GameState = {
-  gameStatus: GameStatus.Default,
-};
+import { ACTIONS_TYPES, GameStatus, INITIAL_STATE } from '../constants/gameConstants';
+import { GameAction, GameState } from '../typings/GameTypings';
 
 const gameReducer = function (state: GameState = INITIAL_STATE, action: GameAction): GameState {
   switch (action.type) {
-    case ACTIONS.GAME_START:
+    case ACTIONS_TYPES.GAME_START:
       return {
         ...state,
         gameStatus: GameStatus.InProgress,

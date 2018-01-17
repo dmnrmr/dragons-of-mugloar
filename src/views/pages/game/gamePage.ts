@@ -1,9 +1,13 @@
+import { Store } from 'redux';
 import { TagInterface } from 'riot';
-import { startGame } from '../../../actions/gameActions';
-import { store } from '../../../index';
-import { GameState } from '../../../typings/gameTypings';
+import { startGame } from '../../../actionCreators/gameActionCreator';
+import { GameState } from '../../../typings/GameTypings';
+import { RootState } from '../../../typings/RootTypings';
 
 export interface GamePage extends TagInterface {
+  opts: {
+    store: Store<RootState>;
+  };
   state: GameState;
   unsubscribe(): void;
 }
@@ -15,9 +19,9 @@ export const init = function (tag: GamePage): void {
   };
 
   tag.on('mount', () => {
-    tag.unsubscribe = store.subscribe(() => updateState(store.getState()));
+    tag.unsubscribe = tag.opts.store.subscribe(() => updateState(tag.opts.store.getState().game));
 
-    startGame();
+    tag.opts.store.dispatch(startGame());
   });
 
   tag.on('unmount', () => tag.unsubscribe());

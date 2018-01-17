@@ -1,10 +1,7 @@
-import { createStore } from 'redux';
 import webfontloader from 'webfontloader';
 import router from './config/router';
-import gameReducer from './reducers/gameReducer';
+import configureStore from './config/store';
 import './styles/common.styl';
-
-export const store = createStore(gameReducer);
 
 const initFonts = () => new Promise((resolve) => {
   webfontloader.load({
@@ -17,6 +14,9 @@ const initFonts = () => new Promise((resolve) => {
 
 const init = () => {
   initFonts().then(() => {
+    const store = configureStore();
+
+    router.setDependency('store', store);
     router.start();
   });
 };

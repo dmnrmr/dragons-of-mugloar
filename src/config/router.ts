@@ -24,6 +24,7 @@ Object.keys(routes).forEach((key) => {
 });
 
 router.addListener((toState, fromState) => {
+  const { store } = router.getDependencies();
   const route = routes[toState.name];
   const isNavigatingToSameRoute = fromState !== null && fromState.name === toState.name;
 
@@ -33,7 +34,7 @@ router.addListener((toState, fromState) => {
 
   updateDocumentTitle(route.title);
 
-  riot.mount(document.getElementById('app'), route.page);
+  riot.mount(document.getElementById('app'), route.page, { store });
 });
 
 export default router;

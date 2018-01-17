@@ -1,7 +1,7 @@
 <dom-index-page class="index-page">
   <h1 class="index-page__title">Dragons of Mugloar</h1>
 
-  <dom-button button-click-handler="{ routeToGamePage }" />
+  <dom-button button-click-handler="{ routeToGamePage }" button-text="Play" />
 
   <script>
     import '../../components/button';
