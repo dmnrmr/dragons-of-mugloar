@@ -21,7 +21,7 @@ const playGame = function (
   return action$
     .ofType(ACTIONS_TYPES.PLAY_GAME, ACTIONS_TYPES.GAME_SOLVED, ACTIONS_TYPES.STOP_PLAYING)
     .takeWhile(action => action.type !== ACTIONS_TYPES.STOP_PLAYING)
-    .delay(2500)
+    .delay(500)
     .switchMap(() =>
       startBattle()
         .flatMap(game => {
