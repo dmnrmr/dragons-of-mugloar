@@ -1,18 +1,39 @@
 import { Action } from 'redux';
-import { GameStatus } from '../constants/gameConstants';
+import { PlayStatus } from '../constants/gameConstants';
+
+interface Knight {
+  name: string;
+  attack: number;
+  armor: number;
+  agility: number;
+  endurance: number;
+}
 
 export interface Dragon {
-  dragon: DragonAttributes;
+  [key: string]: number;
+}
+
+export interface GameResult {
+  status: string;
+  message?: string;
+}
+
+export interface Weather {
+}
+
+export interface Game {
+  gameId: number;
+  knight: Knight;
+  dragon: Dragon;
+  result: GameResult;
 }
 
 export interface GameAction extends Action {
-  dragon?: Dragon;
+  game?: Game;
 }
 
 export interface GameState {
-  gameStatus: GameStatus;
-}
-
-interface DragonAttributes {
-  [key: string]: number;
+  playStatus: PlayStatus;
+  games: Game[];
+  currentGame?: Game;
 }
