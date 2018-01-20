@@ -24,6 +24,16 @@ const generateConfig = function (isProd) {
       },
       port: 8080,
       disableHostCheck: true,
+      proxy: {
+        '/api/*': {
+          target: 'http://www.dragonsofmugloar.com',
+          changeOrigin: true
+        },
+        '/weather/*': {
+          target: 'http://www.dragonsofmugloar.com',
+          changeOrigin: true
+        },
+      },
     },
     module: {
       rules: [
