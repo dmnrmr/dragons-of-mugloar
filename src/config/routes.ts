@@ -2,7 +2,7 @@ import * as routes from '../constants/routes';
 import gamePage from '../views/pages/game';
 import indexPage from '../views/pages/index';
 
-export interface RouteConfig {
+interface RouteConfig {
   path: string;
   page: string;
   title?: string;

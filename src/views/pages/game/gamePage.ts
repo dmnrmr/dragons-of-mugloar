@@ -4,7 +4,7 @@ import { startGame } from '../../../actionCreators/gameActionCreator';
 import { GameState } from '../../../typings/GameTypings';
 import { RootState } from '../../../typings/RootTypings';
 
-export interface GamePage extends TagInterface {
+interface GamePage extends TagInterface {
   opts: {
     store: Store<RootState>;
   };

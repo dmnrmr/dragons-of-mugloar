@@ -2,7 +2,7 @@ import { TagInterface } from 'riot';
 import router from '../../../config/router';
 import { GAME_ROUTE } from '../../../constants/routes';
 
-export interface IndexPage extends TagInterface {
+interface IndexPage extends TagInterface {
   routeToGamePage(): void;
 }
 

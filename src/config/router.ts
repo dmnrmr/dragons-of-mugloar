@@ -6,9 +6,9 @@ import { INDEX_ROUTE } from '../constants/routes';
 import { updateDocumentTitle } from '../services/htmlService';
 import routes from './routes';
 
-export type RouterListenerCallback = (toState: State, fromState: State | null) => void;
+type RouterListenerCallback = (toState: State, fromState: State | null) => void;
 
-export interface RouterWithListenersPlugin extends Router {
+interface RouterWithListenersPlugin extends Router {
   addListener(fn: RouterListenerCallback): this;
 }
 
