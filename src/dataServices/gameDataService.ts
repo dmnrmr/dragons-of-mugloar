@@ -1,18 +1,21 @@
+import { Observable } from 'rxjs';
+import { ajax } from 'rxjs/observable/dom/ajax';
+import { AjaxResponse } from 'rxjs/observable/dom/AjaxObservable';
 import { API } from '../constants/gameConstants';
-import { Dragon } from '../typings/GameTypings';
+import { Dragon, Game, Weather } from '../typings/GameTypings';
 
-export const startBattle = function (): Promise<Response> {
-  return fetch(API.GAME, { method: 'GET' });
+export const startBattle = function (): Observable<Game> {
+  return ajax.getJSON(API.GAME);
 };
 
-export const solveBattle = function (gameId: string, data: Dragon): Promise<Response> {
-  return fetch(`${API.GAME}/${gameId}/solution`, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-   });
+export const solveBattle = function (gameId: number, dragon: Dragon): Observable<AjaxResponse> {
+  return ajax.put(
+    `${API.GAME}/${gameId}/solution`,
+     { dragon },
+     { 'Content-Type': 'application/json' },
+  );
 };
 
-export const getWeather = function (gameId: string): Promise<Response> {
-  return fetch(`${API.WEATHER}/${gameId}`, { method: 'GET' })
-          .then(response => response.json());
+export const getWeather = function (gameId: string): Observable<Weather> {
+  return ajax.getJSON(`${API.WEATHER}/${gameId}`);
 };
