@@ -1,23 +1,25 @@
 import { GameState } from '../typings/GameTypings';
 
 export const ACTIONS_TYPES = {
-  GAME_START: 'GAME_START_ACTION',
-  GAME_FAILED_TO_START: 'GAME_FAILED_TO_START_ACTION',
+  PLAY_GAME: 'PLAY_GAME_ACTION',
+  STOP_PLAYING: 'STOP_PLAYING_ACTION',
   GAME_STARTED: 'GAME_STARTED_ACTION',
+  GAME_FAILED_TO_START: 'GAME_FAILED_TO_START_ACTION',
+  GAME_SOLVED: 'GAME_SOLVED_ACTION',
 };
 
 export const API = {
-  GAME: 'http://www.dragonsofmugloar.com/api/game',
-  WEATHER: 'http://www.dragonsofmugloar.com/weather',
+  GAME: '/api/game',
+  WEATHER: '/weather',
 };
 
-export enum GameStatus {
-  Default,
-  InProgress,
-  Paused,
+export enum PlayStatus {
+  Stopped,
+  Playing,
   Failed,
 }
 
 export const INITIAL_STATE: GameState = {
-  gameStatus: GameStatus.Default,
+  playStatus: PlayStatus.Stopped,
+  games: [],
 };
