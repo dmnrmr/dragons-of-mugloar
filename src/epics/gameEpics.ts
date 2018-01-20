@@ -6,31 +6,29 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/takeWhile';
 import { Observable } from 'rxjs/Observable';
-import { gameSolved, gameStarted } from '../actionCreators/gameActionCreators';
+import { gameSolved } from '../actionCreators/gameActionCreators';
 import { ACTIONS_TYPES } from '../constants/gameConstants';
 import { solveBattle, startBattle } from '../dataServices/gameDataService';
+import { trainDragon } from '../services/gameService';
 import { GameAction } from '../typings/GameTypings';
 
-export const startGame = function (
+const playGame = function (
   action$: ActionsObservable<GameAction>,
 ): Observable<Action> {
   return action$
     .ofType(ACTIONS_TYPES.PLAY_GAME, ACTIONS_TYPES.GAME_SOLVED, ACTIONS_TYPES.STOP_PLAYING)
     .takeWhile(action => action.type !== ACTIONS_TYPES.STOP_PLAYING)
+    .delay(500)
     .switchMap(() =>
       startBattle()
-        .map(game => gameStarted(game))
+        .flatMap(game => {
+          const dragon = trainDragon();
+
+          return solveBattle(game.gameId, dragon)
+            .map(response => gameSolved(game, response.response));
+        })
         .takeUntil(action$.ofType(ACTIONS_TYPES.STOP_PLAYING)),
     );
 };
 
-export const solveGame = function (action$: ActionsObservable<GameAction>): Observable<Action> {
-  return action$
-    .ofType(ACTIONS_TYPES.GAME_STARTED)
-    .delay(500)
-    .switchMap(({ game }) =>
-      solveBattle(game.gameId, game.dragon)
-        .map(response => gameSolved(game, response.response))
-        .takeUntil(action$.ofType(ACTIONS_TYPES.STOP_PLAYING)),
-    );
-};
+export default playGame;
