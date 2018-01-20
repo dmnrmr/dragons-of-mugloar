@@ -13,6 +13,12 @@ export const stopPlaying = function (): GameAction {
   };
 };
 
+export const gameFailed = function (): GameAction {
+  return {
+    type: ACTIONS_TYPES.GAME_FAILED,
+  };
+};
+
 export const gameSolved = function (game: Game, result: GameResult): GameAction {
   return {
     type: ACTIONS_TYPES.GAME_SOLVED,

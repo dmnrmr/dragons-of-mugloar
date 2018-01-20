@@ -18,6 +18,11 @@ const gameReducer = function (state: GameState = INITIAL_STATE, action: GameActi
         ...state,
         games: [...state.games, action.game],
       };
+    case ACTIONS_TYPES.GAME_FAILED:
+      return {
+        ...state,
+        playStatus: PlayStatus.Failed,
+      };
     default:
       return state;
   }
