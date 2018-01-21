@@ -1,21 +1,29 @@
-import { Observable } from 'rxjs';
-import { ajax } from 'rxjs/observable/dom/ajax';
-import { AjaxResponse } from 'rxjs/observable/dom/AjaxObservable';
+import axios, { AxiosPromise } from 'axios';
 import { API } from '../constants/gameConstants';
-import { Dragon, Game, Weather } from '../typings/GameTypings';
+import { Dragon, Game } from '../typings/GameTypings';
 
-export const startBattle = function (): Observable<Game> {
-  return ajax.getJSON(API.GAME);
+const CancelToken = axios.CancelToken;
+
+export const source = CancelToken.source();
+
+export const startBattle = function (): AxiosPromise<Game> {
+  return axios({
+    method: 'get',
+    url: API.GAME,
+    responseType: 'json',
+    cancelToken: source.token
+  });
 };
 
-export const solveBattle = function (gameId: number, dragon: Dragon): Observable<AjaxResponse> {
-  return ajax.put(
-    `${API.GAME}/${gameId}/solution`,
-     { dragon },
-     { 'Content-Type': 'application/json' }
-  );
-};
-
-export const getWeather = function (gameId: string): Observable<Weather> {
-  return ajax.getJSON(`${API.WEATHER}/${gameId}`);
+export const solveBattle = function (gameId: number, dragon: Dragon): AxiosPromise<any> {
+  return axios({
+    method: 'put',
+    url: `${API.GAME}/${gameId}/solution`,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: dragon,
+    responseType: 'json',
+    cancelToken: source.token
+  });
 };

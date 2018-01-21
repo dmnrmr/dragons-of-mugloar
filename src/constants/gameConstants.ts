@@ -9,8 +9,8 @@ export const ACTIONS_TYPES = {
 };
 
 export const API = {
-  GAME: '/api/game',
-  WEATHER: '/weather'
+  GAME: 'http://www.dragonsofmugloar.com/api/game',
+  WEATHER: 'http://www.dragonsofmugloar.com/weather/api/report'
 };
 
 export enum PlayStatus {

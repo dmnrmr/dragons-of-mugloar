@@ -11,28 +11,38 @@ import 'rxjs/add/operator/takeWhile';
 import { Observable } from 'rxjs/Observable';
 import { gameFailed, gameSolved } from '../actionCreators/gameActionCreators';
 import { ACTIONS_TYPES } from '../constants/gameConstants';
-import { solveBattle, startBattle } from '../dataServices/gameDataService';
+import { solveBattle, source, startBattle } from '../dataServices/gameDataService';
 import { trainDragon } from '../services/gameService';
 import { GameAction } from '../typings/GameTypings';
 
+const isGamePlayable = function (action: GameAction): boolean {
+  if (action.type !== ACTIONS_TYPES.STOP_PLAYING) {
+    return true;
+  }
+
+  source.cancel();
+
+  return false;
+};
+
 const playGame = function (
   action$: ActionsObservable<GameAction>
-): Observable<Action> {
+): Observable<GameAction> {
   return action$
     .ofType(ACTIONS_TYPES.PLAY_GAME, ACTIONS_TYPES.GAME_SOLVED, ACTIONS_TYPES.STOP_PLAYING)
-    .takeWhile(action => action.type !== ACTIONS_TYPES.STOP_PLAYING)
-    .delay(500)
+    .takeWhile(isGamePlayable)
+    .delay(2500)
     .switchMap(() =>
       startBattle()
-        .flatMap(game => {
+        .then(gameResponse => {
           const dragon = trainDragon();
 
-          return solveBattle(game.gameId, dragon)
-            .map(response => gameSolved(game, response.response))
-            .catch(() => Observable.of(gameFailed()));
+          return solveBattle(gameResponse.data.gameId, dragon)
+            .then(solutionResponse => {
+              return gameSolved(gameResponse.data, solutionResponse.data);
+            });
         })
-        .catch(() => Observable.of(gameFailed()))
-        .takeUntil(action$.ofType(ACTIONS_TYPES.STOP_PLAYING))
+        .catch(() => gameFailed())
     );
 };
 

@@ -4,6 +4,7 @@
   "description": "TS solution for Dragons of Mugloar game",
   "main": "src/index.js",
   "dependencies": {
+    "axios": "0.17.1",
     "redux": "3.7.2",
     "redux-observable": "0.17.0",
     "riot": "3.8.1",
