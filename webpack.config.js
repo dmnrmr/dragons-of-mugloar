@@ -12,7 +12,7 @@ const generateConfig = function (isProd) {
     output: {
       path: path.resolve(__dirname, './dist/'),
       filename: 'bundle.[hash].js',
-      publicPath: '/',
+      publicPath: '/'
     },
     devServer: {
       contentBase: path.resolve(__dirname, './dist'),
@@ -20,7 +20,7 @@ const generateConfig = function (isProd) {
       stats: {
         hash: false,
         version: false,
-        modules: false,
+        modules: false
       },
       port: 8080,
       disableHostCheck: true,
@@ -32,8 +32,8 @@ const generateConfig = function (isProd) {
         '/weather/*': {
           target: 'http://www.dragonsofmugloar.com',
           changeOrigin: true
-        },
-      },
+        }
+      }
     },
     module: {
       rules: [
@@ -47,19 +47,18 @@ const generateConfig = function (isProd) {
                 compilerOptions: {
                   module: isProd ? 'commonjs' : 'es6'
                 }
-              },
+              }
             },
             'tslint-loader',
-          ],
-
+          ]
         }, {
           test: /\.(tag)$/,
           use: [
             {
               loader: 'riot-tag-loader',
-              options: {},
-            },
-          ],
+              options: {}
+            }
+          ]
         }, {
           test: /\.styl$/,
           use: ExtractTextPlugin.extract({
@@ -71,30 +70,30 @@ const generateConfig = function (isProd) {
                 options: {
                   ident: 'postcss',
                   plugins: () => [autoprefixer],
-                  sourceMap: true,
-                },
+                  sourceMap: true
+                }
               },
-              'stylus-loader',
-            ],
-          }),
-        },
-      ],
+              'stylus-loader'
+            ]
+          })
+        }
+      ]
     },
     plugins: [
       new ExtractTextPlugin({
         filename: 'bundle.[hash].css',
-        allChunks: true,
+        allChunks: true
       }),
       new ForkTsCheckerWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: './public/index.html',
-        inject: false,
+        inject: false
       })
     ],
     resolve: {
       extensions: ['.js', '.ts', 'styl'],
-      modules: ['node_modules'],
-    },
+      modules: ['node_modules']
+    }
   };
 
   if (isProd) {
@@ -102,8 +101,8 @@ const generateConfig = function (isProd) {
       new CleanWebpackPlugin(['dist/*'], {
         root: __dirname,
         verbose: true,
-        dry: false,
-      }),
+        dry: false
+      })
     );
 
     delete config.devtool;

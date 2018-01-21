@@ -16,7 +16,7 @@ import { trainDragon } from '../services/gameService';
 import { GameAction } from '../typings/GameTypings';
 
 const playGame = function (
-  action$: ActionsObservable<GameAction>,
+  action$: ActionsObservable<GameAction>
 ): Observable<Action> {
   return action$
     .ofType(ACTIONS_TYPES.PLAY_GAME, ACTIONS_TYPES.GAME_SOLVED, ACTIONS_TYPES.STOP_PLAYING)
@@ -32,7 +32,7 @@ const playGame = function (
             .catch(() => Observable.of(gameFailed()));
         })
         .catch(() => Observable.of(gameFailed()))
-        .takeUntil(action$.ofType(ACTIONS_TYPES.STOP_PLAYING)),
+        .takeUntil(action$.ofType(ACTIONS_TYPES.STOP_PLAYING))
     );
 };
 

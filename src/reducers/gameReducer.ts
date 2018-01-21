@@ -6,22 +6,22 @@ const gameReducer = function (state: GameState = INITIAL_STATE, action: GameActi
     case ACTIONS_TYPES.PLAY_GAME:
       return {
         ...state,
-        playStatus: PlayStatus.Playing,
+        playStatus: PlayStatus.Playing
       };
     case ACTIONS_TYPES.STOP_PLAYING:
       return {
         ...state,
-        playStatus: PlayStatus.Stopped,
+        playStatus: PlayStatus.Stopped
       };
     case ACTIONS_TYPES.GAME_SOLVED:
       return {
         ...state,
-        games: [...state.games, action.game],
+        games: [...state.games, action.game]
       };
     case ACTIONS_TYPES.GAME_FAILED:
       return {
         ...state,
-        playStatus: PlayStatus.Failed,
+        playStatus: PlayStatus.Failed
       };
     default:
       return state;

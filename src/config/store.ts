@@ -11,9 +11,9 @@ const configureStore = function (): Store<RootState> {
   const store = createStore(
     rootReducer,
     {
-      game: INITIAL_STATE,
+      game: INITIAL_STATE
     },
-    applyMiddleware(epicMiddleware),
+    applyMiddleware(epicMiddleware)
   );
 
   return store;

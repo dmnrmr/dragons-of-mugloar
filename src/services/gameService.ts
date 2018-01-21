@@ -5,6 +5,6 @@ export const trainDragon = function (): Dragon {
     scaleThickness: 10,
     clawSharpness: 5,
     wingStrength: 4,
-    fireBreath: 1,
+    fireBreath: 1
   };
 };

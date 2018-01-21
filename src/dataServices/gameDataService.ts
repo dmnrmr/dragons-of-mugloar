@@ -12,7 +12,7 @@ export const solveBattle = function (gameId: number, dragon: Dragon): Observable
   return ajax.put(
     `${API.GAME}/${gameId}/solution`,
      { dragon },
-     { 'Content-Type': 'application/json' },
+     { 'Content-Type': 'application/json' }
   );
 };
 

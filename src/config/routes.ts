@@ -11,13 +11,13 @@ interface RouteConfig {
 const routeConfig: { [key: string]: RouteConfig } = {
   [routes.INDEX_ROUTE]: {
     path: '/',
-    page: indexPage,
+    page: indexPage
   },
   [routes.GAME_ROUTE]: {
     path: '/game',
     page: gamePage,
-    title: 'Now playing',
-  },
+    title: 'Now playing'
+  }
 };
 
 export default routeConfig;

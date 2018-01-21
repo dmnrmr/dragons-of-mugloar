@@ -96,7 +96,7 @@
     "semicolon": true,
     "switch-default": true,
     "trailing-comma": [
-      true, { "multiline": "always", "singleline": "never" }
+      true, { "multiline": "never", "singleline": "never" }
     ],
     "triple-equals": [
       true,
