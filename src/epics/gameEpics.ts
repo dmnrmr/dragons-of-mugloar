@@ -8,22 +8,14 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/takeWhile';
 import { Observable } from 'rxjs/Observable';
-import { gameFailed, gameSolved, stopPlaying } from '../actionCreators/gameActionCreators';
+import { gameFailed, gameSolved } from '../actionCreators/gameActionCreators';
 import { ACTIONS_TYPES } from '../constants/gameConstants';
-import { getWeather, solveBattle, source, startBattle } from '../dataServices/gameDataService';
+import { getWeather, solveBattle, startBattle } from '../dataServices/gameDataService';
 import { getWeatherData, trainDragon } from '../services/gameService';
 import { GameAction } from '../typings/GameTypings';
 
-const GAME_CANCEL_MESSAGE = 'gameStoppedByUser';
-
 const isGamePlayable = function (action: GameAction): boolean {
-  if (action.type !== ACTIONS_TYPES.STOP_PLAYING) {
-    return true;
-  }
-
-  source.cancel(GAME_CANCEL_MESSAGE);
-
-  return false;
+  return action.type !== ACTIONS_TYPES.STOP_PLAYING;
 };
 
 const playGame = function (
@@ -35,24 +27,18 @@ const playGame = function (
     .delay(500)
     .switchMap(() =>
       startBattle()
-        .then(gameResponse => {
-          const game = gameResponse.data;
+        .flatMap(gameResponse => getWeather(gameResponse.response.gameId)
+          .flatMap(weatherResponse => {
+            const weather = getWeatherData(weatherResponse.response);
+            const dragon = trainDragon(gameResponse.response.knight, weather);
 
-          return getWeather(game.gameId)
-            .then(weatherResponse => {
-              const weather = getWeatherData(weatherResponse.data);
-              const dragon = trainDragon(game.knight, weather);
-
-              return solveBattle(game.gameId, dragon)
-                .then(solutionResponse => {
-                  return gameSolved(game, solutionResponse.data);
-                });
-            });
-        })
-        .catch(error => {
-          return error.message === GAME_CANCEL_MESSAGE ? stopPlaying() : gameFailed();
-        })
-    );
+            return solveBattle(gameResponse.response.gameId, dragon)
+              .map(response => gameSolved(gameResponse.response, response.response));
+          })
+        )
+        .catch(() => Observable.of(gameFailed()))
+    )
+    .takeUntil(action$.ofType(ACTIONS_TYPES.STOP_PLAYING));
 };
 
 export default playGame;
