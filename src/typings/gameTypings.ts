@@ -1,7 +1,7 @@
 import { Action } from 'redux';
-import { PlayStatus } from '../constants/gameConstants';
+import { BattleResult, PlayStatus, WeatherCode } from '../constants/gameConstants';
 
-interface Knight {
+export interface Knight {
   name: string;
   attack: number;
   armor: number;
@@ -10,22 +10,26 @@ interface Knight {
 }
 
 export interface Dragon {
-  [key: string]: number;
+  scaleThickness: number;
+  clawSharpness: number;
+  wingStrength: number;
+  fireBreath: number;
 }
 
 export interface GameResult {
-  status: string;
+  status: BattleResult;
   message?: string;
 }
 
 export interface Weather {
+  code: WeatherCode;
 }
 
 export interface Game {
   gameId: number;
   knight: Knight;
-  dragon: Dragon;
-  result: GameResult;
+  dragon?: Dragon;
+  result?: GameResult;
 }
 
 export interface GameAction extends Action {
@@ -35,5 +39,6 @@ export interface GameAction extends Action {
 export interface GameState {
   playStatus: PlayStatus;
   games: Game[];
-  currentGame?: Game;
+  total: number;
+  wins: number;
 }

@@ -9,6 +9,7 @@ interface GamePage extends TagInterface {
     store: Store<RootState>;
   };
   state: GameState;
+  winrate: number;
   stopPlaying(): void;
   unsubscribe(): void;
 }
@@ -16,6 +17,7 @@ interface GamePage extends TagInterface {
 export const init = function (tag: GamePage): void {
   const updateState = function (state: GameState): void {
     tag.state = state;
+    tag.winrate = Math.floor((state.wins / state.total) * 100);
     tag.update();
   };
 

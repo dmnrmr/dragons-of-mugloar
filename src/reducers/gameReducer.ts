@@ -1,5 +1,13 @@
-import { ACTIONS_TYPES, PlayStatus, INITIAL_STATE } from '../constants/gameConstants';
-import { GameAction, GameState } from '../typings/GameTypings';
+import { ACTIONS_TYPES, BattleResult, INITIAL_STATE, PlayStatus } from '../constants/gameConstants';
+import { Game, GameAction, GameState } from '../typings/GameTypings';
+
+const updateWinCounter = function (state: GameState, game: Game): number {
+  if (game.result.status === BattleResult.Victory) {
+    return state.wins + 1;
+  }
+
+  return state.wins;
+};
 
 const gameReducer = function (state: GameState = INITIAL_STATE, action: GameAction): GameState {
   switch (action.type) {
@@ -16,7 +24,9 @@ const gameReducer = function (state: GameState = INITIAL_STATE, action: GameActi
     case ACTIONS_TYPES.GAME_SOLVED:
       return {
         ...state,
-        games: [...state.games, action.game]
+        games: [...state.games, action.game],
+        total: state.total + 1,
+        wins: updateWinCounter(state, action.game)
       };
     case ACTIONS_TYPES.GAME_FAILED:
       return {

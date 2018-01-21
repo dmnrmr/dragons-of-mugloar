@@ -1,11 +1,24 @@
 <dom-game-page class="game-page">
-  <h1 class="game-page__title">Now playing Dragons of Mugloar</h1>
+  <div class="game-page__header">
+    <h1 class="game-page__title">
+      Dragons of Mugloar:
+      <span class="game-page__status">{ state.playStatus }</span>
+    </h1>
 
-  <span class="game-page__status">{ state.playStatus }</span>
+    <dom-button class="game-page__action-button" button-click-handler="{ stopPlaying }" button-text="Stop" />
+  </div>
 
-  <dom-button class="game-page__action-button" button-click-handler="{ stopPlaying }" button-text="Stop" />
+  <div class="game-page__content">
+    <div class="game-page__column game-page__column--left">
+      <dom-game-list if="{ state.games.length > 0 }" game-list="{ state.games }" />
+    </div>
 
-  <dom-game-list if="{ state.games.length > 0 }" game-list="{ state.games }" />
+    <div class="game-page__column game-page__column--right">
+      <h2 class="game-page__sub-title">Winrate:</h2>
+
+      <p class="game-page__value">{ winrate || 0 }%</p>
+    </div>
+  </div>
 
   <script>
     import { init } from './gamePage';

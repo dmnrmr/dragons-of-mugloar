@@ -14,12 +14,34 @@ export const API = {
 };
 
 export enum PlayStatus {
-  Stopped,
-  Playing,
-  Failed
+  Stopped = 'stopped',
+  Playing = 'playing',
+  Failed = 'failure'
 }
 
 export const INITIAL_STATE: GameState = {
   playStatus: PlayStatus.Stopped,
-  games: []
+  games: [],
+  total: 0,
+  wins: 0
 };
+
+export enum BattleResult {
+  Defeat = 'Defeat',
+  Victory = 'Victory'
+}
+
+export enum WeatherCode {
+  Normal = 'NMR',
+  Flood = 'HVA',
+  Fog = 'FUNDEFINEDG',
+  Storm = 'SRO',
+  Dry = 'T E'
+}
+
+export enum DragonStat {
+  Scale = 'scaleThickness',
+  Claws = 'clawSharpness',
+  Wings = 'wingStrength',
+  Fire = 'fireBreath'
+}

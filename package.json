@@ -1,6 +1,6 @@
 {
   "name": "dragons-of-mugloar",
-  "version": "0.3.0",
+  "version": "0.8.0",
   "description": "TS solution for Dragons of Mugloar game",
   "main": "src/index.js",
   "dependencies": {
